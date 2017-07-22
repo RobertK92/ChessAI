@@ -73,6 +73,16 @@ namespace MonoGameToolkit
             set { _debugPhysicsViewEnabled = value; }
         }
 
+        public Vector2 ScreenSize
+        {
+            get
+            {
+                int screenWidth = Instance.Graphics.PreferredBackBufferWidth;
+                int screenHeight = Instance.Graphics.PreferredBackBufferHeight;
+                return new Vector2(screenWidth, screenHeight);
+            }
+        }
+
         private Texture2D _pixel;
         /// <summary>
         /// A white 1x1 texture.
@@ -254,8 +264,6 @@ namespace MonoGameToolkit
 
             _spriteBatch.End();
 
-            base.Draw(gameTime);
-
             if (secondIntervalTime.TotalSeconds >= 1.0)
             {
                 secondIntervalTime = TimeSpan.Zero;
@@ -264,9 +272,11 @@ namespace MonoGameToolkit
             }
             if (ShowFps)
             {
-                
+
                 _debugDrawer.DrawText(new Vector2(1200, 40), string.Format("Fps: {0}", Fps), Color.Cyan, DrawingSpace.Screen);
             }
+
+            base.Draw(gameTime);
         }
     }
 }
