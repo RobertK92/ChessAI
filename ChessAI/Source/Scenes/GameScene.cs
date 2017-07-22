@@ -9,11 +9,11 @@ namespace ChessAI
 {
     public class GameScene : Scene
     {
-        public Board Board { get; private set; }
+        public GameManager GameManager { get; private set; }
 
         public override void Load()
         {
-            Board = new Board();    
+            GameManager = new GameManager();    
         }
     }
 }

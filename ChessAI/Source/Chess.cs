@@ -19,7 +19,7 @@ namespace ChessAI
         {
             get
             {
-                return "default-texture.png";
+                return "default_texture";
             }
         }
 
@@ -28,6 +28,7 @@ namespace ChessAI
             base.LoadContent();
             Log.DumpFileName = "Log.Chess.txt";
             LoadScene<GameScene>();
+            Log.Message(string.Format("Scene '{0}' loaded", LoadedScene.GetType().Name));
         }
     }
 }
