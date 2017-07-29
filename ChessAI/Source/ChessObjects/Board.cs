@@ -15,7 +15,9 @@ namespace ChessAI
         public Node[,] Nodes { get; private set; }
         public Dictionary<ControllingUnit, List<Piece>> PieceDict { get; private set; }
 
-        public Board() : base("chess_board")
+        public Board() : base("chess_board") { }
+
+        protected override void Initialize()
         {
             DrawOrder = (int)DrawLayer.Board;
 
@@ -27,14 +29,25 @@ namespace ChessAI
             float yOffset = (Chess.Instance.ScreenSize.Y - Size.Y) / 2;
             float xOffset = (Chess.Instance.ScreenSize.X - Size.X) / 2;
             Position = new Vector2(Size.X / 2 + xOffset, Size.Y / 2 + yOffset);
-            
+
             for (int y = 0; y < Nodes.GetLength(1); y++)
             {
                 for (int x = 0; x < Nodes.GetLength(0); x++)
                 {
                     Nodes[x, y] = new Node(new Vector2(
-                        Bounds.Left + (NodeSize / 2) + x * NodeSize, 
+                        Bounds.Left + (NodeSize / 2) + x * NodeSize,
                         Bounds.Top + (NodeSize / 2) + y * NodeSize), x, y);
+
+                    if (x == 0)
+                    {
+                        TextField numberLabel = new TextField((Nodes.GetLength(1) - (y)).ToString());
+                        numberLabel.Position = Nodes[x, y].Position - Vector2.UnitX * (NodeSize / 1.5f);
+                    }
+                    if (y == Nodes.GetLength(1) - 1)
+                    {
+                        TextField letterLabel = new TextField(Nodes[x, y].Name[0].ToString());
+                        letterLabel.Position = Nodes[x, y].Position + Vector2.UnitY * (NodeSize / 1.5f);
+                    }
                 }
             }
 
@@ -46,18 +59,18 @@ namespace ChessAI
         {
             int yOffset = (controllingUnit == ControllingUnit.AI) ? 1 : 6;
             int firstColumn = (controllingUnit == ControllingUnit.AI) ? 0 : 7;
-
-            // Create pawns
+            
             for (int i = 0; i < 8; i++)
-            {
                 PieceDict[controllingUnit].Add(new Piece(PieceType.Pawn, controllingUnit, Nodes[i, yOffset]));
-            }
 
-            // Create knights
             PieceDict[controllingUnit].Add(new Piece(PieceType.Knight, controllingUnit, Nodes[1, firstColumn]));
             PieceDict[controllingUnit].Add(new Piece(PieceType.Knight, controllingUnit, Nodes[6, firstColumn]));
-            
-            //TODO: create more..
+            PieceDict[controllingUnit].Add(new Piece(PieceType.Bishop, controllingUnit, Nodes[2, firstColumn]));
+            PieceDict[controllingUnit].Add(new Piece(PieceType.Bishop, controllingUnit, Nodes[5, firstColumn]));
+            PieceDict[controllingUnit].Add(new Piece(PieceType.Rook, controllingUnit,  Nodes[0, firstColumn]));
+            PieceDict[controllingUnit].Add(new Piece(PieceType.Rook, controllingUnit,  Nodes[7, firstColumn]));
+            PieceDict[controllingUnit].Add(new Piece(PieceType.Queen, controllingUnit,  Nodes[3, firstColumn]));
+            PieceDict[controllingUnit].Add(new Piece(PieceType.King, controllingUnit,   Nodes[4, firstColumn]));
         }
 
         protected override void DebugDraw(DebugDrawer drawer)

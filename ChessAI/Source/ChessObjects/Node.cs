@@ -16,6 +16,7 @@ namespace ChessAI
         public readonly string Name;
 
         public Piece Piece { get; set; }
+        public bool IsFree { get { return Piece == null; } }
 
         public Node(Vector2 position, int xIndex, int yIndex)
         {
@@ -23,7 +24,12 @@ namespace ChessAI
             this.Yindex = yIndex;
             this.Position = position;
 
-            Name = new string(new char[] { "ABCDEFGH"[Xindex], "12345678"[Yindex] });
+            Name = GetNodeName(Xindex, Yindex);
+        }
+
+        public static string GetNodeName(int x, int y)
+        {
+            return new string(new char[] { "ABCDEFGH"[x], "12345678"[y] });
         }
 
         public override string ToString()

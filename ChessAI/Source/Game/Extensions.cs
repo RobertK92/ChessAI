@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ChessAI
 {
@@ -19,13 +15,13 @@ namespace ChessAI
                 case PieceType.Knight:
                     return "piece_knight" + postfix;
                 case PieceType.Bishop:
-                    return "piece_pawn" + postfix;
-                case PieceType.Tower:
-                    return "piece_pawn" + postfix;
+                    return "piece_bishop" + postfix;
+                case PieceType.Rook:
+                    return "piece_tower" + postfix;
                 case PieceType.Queen:
-                    return "piece_pawn" + postfix;
+                    return "piece_queen" + postfix;
                 case PieceType.King:
-                    return "piece_pawn" + postfix;
+                    return "piece_king" + postfix;
                 default:
                     throw new ArgumentException("Invalid piece type");
             }

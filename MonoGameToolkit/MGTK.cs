@@ -188,12 +188,7 @@ namespace MonoGameToolkit
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _debugDrawer = new DebugDrawer(GraphicsDevice);
         }
-
-        protected override void UnloadContent()
-        {
-
-        }
-
+        
         protected override void Update(GameTime gameTime)
         {
             DeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -216,7 +211,7 @@ namespace MonoGameToolkit
             _prevGamePadState = GamePad.GetState(PlayerIndex.One);
             base.Update(gameTime);
         }
-
+        
         protected override void Draw(GameTime gameTime)
         {
             secondIntervalTime += gameTime.ElapsedGameTime;
@@ -262,6 +257,7 @@ namespace MonoGameToolkit
                 _spriteBatch.Draw(_renderTarget, Vector2.Zero, Color.White);
             }
 
+
             _spriteBatch.End();
 
             if (secondIntervalTime.TotalSeconds >= 1.0)
@@ -272,7 +268,6 @@ namespace MonoGameToolkit
             }
             if (ShowFps)
             {
-
                 _debugDrawer.DrawText(new Vector2(1200, 40), string.Format("Fps: {0}", Fps), Color.Cyan, DrawingSpace.Screen);
             }
 

@@ -17,7 +17,27 @@ namespace MonoGameToolkit
 
         [LogStaticValue(MGTK.InternalLogColor)]
         public static int Batches { get { return MGTK.Instance.LoadedScene.Drawables.Count; } }
-        
+
+        public static IEnumerable<T> GetObjects<T>() where T : BaseObject
+        {
+            return Enumerable.Cast<T>(MGTK.Instance.LoadedScene.Objects.Where(x => x.GetType() == typeof(T)));
+        }
+
+        public static T GetObject<T>() where T : BaseObject
+        {
+            return (T)MGTK.Instance.LoadedScene.Objects.FirstOrDefault(x => x.GetType() == typeof(T));
+        }
+
+        public static BaseObject GetObject(string name)
+        {
+            return MGTK.Instance.LoadedScene.Objects.FirstOrDefault(x => x.Name == name);
+        }
+
+        public static IEnumerable<BaseObject> GetObjects(string name)
+        {
+            return MGTK.Instance.LoadedScene.Objects.Where(x => x.Name == name);
+        }
+
         protected ContentManager Content { get { return MGTK.Instance.Content; } }
         protected GraphicsDevice GraphicsDevice { get { return MGTK.Instance.GraphicsDevice; } }
         protected GraphicsDeviceManager Graphics { get { return MGTK.Instance.Graphics; } }
@@ -55,26 +75,6 @@ namespace MonoGameToolkit
         public virtual void Unload() { }
         public virtual void Update(GameTime gameTime) { }
         public virtual void DebugDraw(DebugDrawer drawer) { }
-
-        public IEnumerable<T> GetObjects<T>() where T : BaseObject
-        {
-            return Enumerable.Cast<T>(Objects.Where(x => x.GetType() == typeof(T)));
-        }
-
-        public T GetObject<T>() where T : BaseObject
-        {
-            return (T)Objects.FirstOrDefault(x => x.GetType() == typeof(T));
-        }
-
-        public BaseObject GetObject(string name)
-        {
-            return Objects.FirstOrDefault(x => x.Name == name);
-        }
-
-        public IEnumerable<BaseObject> GetObjects(string name)
-        {
-            return Objects.Where(x => x.Name == name);
-        }
         
         internal void LoadInternal()
         {

@@ -45,18 +45,19 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Source\Chess.cs" />
+    <Compile Include="Source\ChessObjects\MoveRule.cs" />
+    <Compile Include="Source\Controlling\ChessMouse.cs" />
+    <Compile Include="Source\Enums\MoveDirection.cs" />
+    <Compile Include="Source\Game\Chess.cs" />
     <Compile Include="Source\ChessObjects\Board.cs" />
     <Compile Include="Source\ChessObjects\Node.cs" />
     <Compile Include="Source\ChessObjects\Piece.cs" />
-    <Compile Include="Source\Controllers\AIController.cs" />
-    <Compile Include="Source\Controllers\Controller.cs" />
-    <Compile Include="Source\Controllers\PlayerController.cs" />
-    <Compile Include="Source\DrawLayer.cs" />
+    <Compile Include="Source\Controlling\MoveManager.cs" />
+    <Compile Include="Source\Game\DrawLayer.cs" />
     <Compile Include="Source\Enums\ControllingUnit.cs" />
     <Compile Include="Source\Enums\PieceType.cs" />
-    <Compile Include="Source\Extensions.cs" />
-    <Compile Include="Source\GameManager.cs" />
+    <Compile Include="Source\Game\Extensions.cs" />
+    <Compile Include="Source\Game\GameManager.cs" />
     <Compile Include="Source\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Scenes\GameScene.cs" />

@@ -1,0 +1,14 @@
+Boring stuff
+- Move rules per piece type (normal and capture moves)
+- Update possible moves after every turn
+- Player controller -> drag n drop pieces on possible moves
+- Player turn -> highlight possible moves when dragging piece
+- Show captured pieces on the sides
+- Pawn promotion
+- Rokade (Castling)
+- Schaak (Check)
+- Schaakmat (checkmate)
+
+AI
+- Evaluate all possible moves (breakdown required)
+- Score best move and lerp piece there

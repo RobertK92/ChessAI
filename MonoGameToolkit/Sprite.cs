@@ -7,8 +7,7 @@ namespace MonoGameToolkit
     {
         private Texture2D _texture;
         public Texture2D Texture { get { return _texture; } }
-
-
+        
         public Sprite(Texture2D texture)
             : base()
         {

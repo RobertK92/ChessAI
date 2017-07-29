@@ -39,7 +39,7 @@ namespace SharpUtils
         private static Dictionary<byte, bool> debugChannels = new Dictionary<byte, bool>();
         private static RichTextBox logBox;
         private static Form logBoxForm;
-
+        
         public static Action<string, LogType> OnLogged = delegate { };
 
         /// <summary>
@@ -192,6 +192,7 @@ namespace SharpUtils
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
         }
+
 
         public static void BindLogToRichTextBox(RichTextBox richTextBox) 
         {

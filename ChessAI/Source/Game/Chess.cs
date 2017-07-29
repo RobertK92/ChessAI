@@ -1,4 +1,5 @@
 ﻿
+using System;
 using MonoGameToolkit;
 using SharpUtils;
 
@@ -28,7 +29,12 @@ namespace ChessAI
             base.LoadContent();
             Log.DumpFileName = "Log.Chess.txt";
             LoadScene<GameScene>();
+            
+            DebugDrawEnabled = false;
+            DebugPhysicsViewEnabled = false;
+
             Log.Message(string.Format("Scene '{0}' loaded", LoadedScene.GetType().Name));
         }
+
     }
 }
