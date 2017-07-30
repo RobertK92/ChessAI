@@ -10,6 +10,8 @@ namespace ChessAI
 {
     public class Board : Sprite
     {
+        public const int NodeCountX = 8;
+        public const int NodeCountY = 8;
         public const int NodeSize = 85;
 
         public Node[,] Nodes { get; private set; }
@@ -21,7 +23,7 @@ namespace ChessAI
         {
             DrawOrder = (int)DrawLayer.Board;
 
-            Nodes = new Node[8, 8];
+            Nodes = new Node[NodeCountX, NodeCountY];
             PieceDict = new Dictionary<ControllingUnit, List<Piece>>();
             PieceDict.Add(ControllingUnit.AI, new List<Piece>());
             PieceDict.Add(ControllingUnit.Human, new List<Piece>());
@@ -60,29 +62,31 @@ namespace ChessAI
             int yOffset = (controllingUnit == ControllingUnit.AI) ? 1 : 6;
             int firstColumn = (controllingUnit == ControllingUnit.AI) ? 0 : 7;
             
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < NodeCountX; i++)
                 PieceDict[controllingUnit].Add(new Piece(PieceType.Pawn, controllingUnit, Nodes[i, yOffset]));
 
             PieceDict[controllingUnit].Add(new Piece(PieceType.Knight, controllingUnit, Nodes[1, firstColumn]));
             PieceDict[controllingUnit].Add(new Piece(PieceType.Knight, controllingUnit, Nodes[6, firstColumn]));
             PieceDict[controllingUnit].Add(new Piece(PieceType.Bishop, controllingUnit, Nodes[2, firstColumn]));
             PieceDict[controllingUnit].Add(new Piece(PieceType.Bishop, controllingUnit, Nodes[5, firstColumn]));
-            PieceDict[controllingUnit].Add(new Piece(PieceType.Rook, controllingUnit,  Nodes[0, firstColumn]));
-            PieceDict[controllingUnit].Add(new Piece(PieceType.Rook, controllingUnit,  Nodes[7, firstColumn]));
+            PieceDict[controllingUnit].Add(new Piece(PieceType.Rook, controllingUnit,   Nodes[0, firstColumn]));
+            PieceDict[controllingUnit].Add(new Piece(PieceType.Rook, controllingUnit,   Nodes[7, firstColumn]));
             PieceDict[controllingUnit].Add(new Piece(PieceType.Queen, controllingUnit,  Nodes[3, firstColumn]));
             PieceDict[controllingUnit].Add(new Piece(PieceType.King, controllingUnit,   Nodes[4, firstColumn]));
+
+            PieceDict[controllingUnit].ForEach(x => x.UpdatePossibleMoves());
         }
 
         protected override void DebugDraw(DebugDrawer drawer)
         {
-            for (int y = 0; y < Nodes.GetLength(1); y++)
+            /*for (int y = 0; y < Nodes.GetLength(1); y++)
             {
                 for (int x = 0; x < Nodes.GetLength(0); x++)
                 {
                     drawer.DrawCircle(Nodes[x, y].Position, 32, Color.Red, DrawingSpace.Screen);
                     drawer.DrawText(Nodes[x, y].Position, Nodes[x, y].ToString(), Color.Black, DrawingSpace.Screen);
                 }
-            }
+            }*/
         }
 
         protected override void OnDestroy()

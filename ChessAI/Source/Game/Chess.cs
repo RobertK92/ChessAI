@@ -30,8 +30,8 @@ namespace ChessAI
             Log.DumpFileName = "Log.Chess.txt";
             LoadScene<GameScene>();
             
-            DebugDrawEnabled = false;
-            DebugPhysicsViewEnabled = false;
+            DebugDrawEnabled = true;
+            DebugPhysicsViewEnabled = true;
 
             Log.Message(string.Format("Scene '{0}' loaded", LoadedScene.GetType().Name));
         }

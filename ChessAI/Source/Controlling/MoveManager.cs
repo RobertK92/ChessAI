@@ -30,24 +30,6 @@ namespace ChessAI
             gameManager = Scene.GetObject<GameManager>();   
         }
 
-        public void MovePiece(Piece piece, int x, int y)
-        {
-            if (!MyPieces.Contains(piece))
-            {
-                Log.Error(string.Format("Piece '{0}' cannot be controlled by me", piece.Name));
-                return;
-            }
-
-            Node node = piece.PossibleMoves.FirstOrDefault(p => p.Xindex == x && p.Yindex == y);
-            if(node == null)
-            {
-                Log.Error(string.Format("Failed to move piece '{0}' to '{1}': invalid move", piece.Name, Node.GetNodeName(x, y)));
-                return;
-            }
-
-            //TODO: lerp to node and set
-        }
-
         public void OnTurnBegin(ControllingUnit controllingUnit)
         {
             Log.Message(string.Format("{0}'s turn", controllingUnit));

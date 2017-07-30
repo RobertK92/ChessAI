@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using MonoGameToolkit;
 using SharpUtils;
 using System;
@@ -52,23 +53,49 @@ namespace ChessAI
         {
             PhysicsBody.Position = Mouse.GetState().Position.ToVector2() * Physics.UPP;
             PhysicsBody.Awake = true;
-
+            
             if(Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 if(overlappingPiece != null)
                 {
-                    if(draggingPiece == null)
+                    if (draggingPiece == null)
+                    {
                         draggingPiece = overlappingPiece;
+                        draggingPiece.IsDragging = true;
+                        foreach (Node move in draggingPiece.PossibleMoves)
+                        {
+                            move.SetHighlightEnabled(true);
+                        }
+                    }
                 }
             }
             else if(Mouse.GetState().LeftButton == ButtonState.Released)
             {
                 if(draggingPiece != null)
                 {
-                    //TODO: Move piece using MoveManager
-                }
+                    draggingPiece.IsDragging = false;
 
-                draggingPiece = null;
+                    foreach (Node move in draggingPiece.PossibleMoves)
+                    {
+                        move.SetHighlightEnabled(false);
+                    }
+
+                    Node overlappingNode = null;
+                    Rectangle mouseRect = new Rectangle(Mouse.GetState().Position, new Point(2, 2));
+                    foreach(Node node in Scene.GetObject<Board>().Nodes)
+                    {
+                        Rectangle nodeRect = new Rectangle(node.Position.ToPoint(), new Point(83, 83));
+                        if(mouseRect.Intersects(nodeRect))
+                        {
+                            overlappingNode = node;
+                            break;
+                        }
+                    }
+
+                    if(overlappingNode != null)
+                        draggingPiece.Move(overlappingNode);
+                    draggingPiece = null;
+                }
             }
         }
     }

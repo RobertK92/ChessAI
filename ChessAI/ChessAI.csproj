@@ -48,6 +48,7 @@
     <Compile Include="Source\ChessObjects\MoveRule.cs" />
     <Compile Include="Source\Controlling\ChessMouse.cs" />
     <Compile Include="Source\Enums\MoveDirection.cs" />
+    <Compile Include="Source\Enums\NodeStatus.cs" />
     <Compile Include="Source\Game\Chess.cs" />
     <Compile Include="Source\ChessObjects\Board.cs" />
     <Compile Include="Source\ChessObjects\Node.cs" />

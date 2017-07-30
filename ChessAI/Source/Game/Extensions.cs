@@ -26,5 +26,10 @@ namespace ChessAI
                     throw new ArgumentException("Invalid piece type");
             }
         }
+
+        public static bool IsInBounds(this object[,] array, int x, int y)
+        {
+            return x < array.GetLength(0) && x >= 0 && y < array.GetLength(1) && y >= 0;
+        }
     }
 }
